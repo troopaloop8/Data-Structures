@@ -76,16 +76,16 @@ class BSTNode:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self):
+    def in_order_print(self, node):
         if self.left:
-            self.left.in_order_print()
+            self.left.in_order_print(node)
         print(self.value)
         if self.right:
-            self.right.in_order_print()
+            self.right.in_order_print(node)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
-    def bft_print(self):
+    def bft_print(self, node):
         queue = Queue()
         queue.enqueue(self)
 
@@ -100,28 +100,28 @@ class BSTNode:
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
-    def dft_print(self):
-        queue = Queue()
-        queue.enqueue(self)
+    def dft_print(self, node):
+        stack = Stack()
+        stack.push(self)
 
-        while len(queue):
-            dequeued_node = queue.dequeue()
-            print(dequeued_node.value)
-            if dequeued_node.left:
-                queue.enqueue(dequeued_node.left)
+        while len(stack):
+            popped_node = stack.pop()
+            print(popped_node.value)
+            if popped_node.right:
+                stack.push(popped_node.right)
+            if popped_node.left:
+                stack.push(popped_node.left)
 
-            if dequeued_node.right:
-                queue.enqueue(dequeued_node.right)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
-    def pre_order_dft(self):
+    def pre_order_dft(self, node):
         pass
 
     # Print Post-order recursive DFT
-    def post_order_dft(self):
+    def post_order_dft(self, node):
         pass
 
 """
@@ -137,8 +137,8 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.bft_print()
-bst.dft_print()
+bst.bft_print(bst)
+bst.dft_print(bst)
 
 # print("elegant methods")
 # print("pre order")
